@@ -116,7 +116,12 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //GET /api/user
 
 const getAllusers = asyncHandler(async (req, res) => {
-  res.send("get all users");
+  const users = await User.find({});
+  if (users && users.length > 0) {
+    res.status(200).json(users);
+  } else {
+    throw new Error("No users found");
+  }
 });
 
 //get user by ıd

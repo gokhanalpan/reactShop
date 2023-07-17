@@ -24,8 +24,13 @@ import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
 import PrivateRoutes from "./Components/PrivateRoutes";
 import OrderScreen from "./Screens/OrderScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
+import OrderListScreen from "./Screens/OrderListScreen";
+import ProductListScreen from "./Screens/ProductListScreen";
+import ProductEditScreen from "./Screens/ProductEditScreen";
+import UserListScreen from "./Screens/UserListScreen";
 import store from "./store";
 import { Provider } from "react-redux";
+import AdminRoutes from "./Components/AdminRoutes";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +47,18 @@ const router = createBrowserRouter(
         <Route path="/placeOrder" element={<PlaceOrderScreen />}></Route>
         <Route path="/orders/:id" element={<OrderScreen />}></Route>
         <Route path="/profile" element={<ProfileScreen />}></Route>
+      </Route>
+      <Route path="" element={<AdminRoutes />}>
+        <Route path="/admin/orderList" element={<OrderListScreen />}></Route>
+        <Route
+          path="/admin/productList"
+          element={<ProductListScreen />}
+        ></Route>
+        <Route
+          path="/admin/product/:id/edit"
+          element={<ProductEditScreen />}
+        ></Route>
+        <Route path="/admin/userList" element={<UserListScreen />}></Route>
       </Route>
     </Route>
   )
