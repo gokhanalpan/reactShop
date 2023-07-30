@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetAllUsersQuery } from "../slices/usersApiSlice";
 import { Button, Table } from "react-bootstrap";
 import Loader from "../Components/Loader";
 import Message from "../Components/Message";
+import { LinkContainer } from "react-router-bootstrap";
 import { FaTimes, FaCheck, FaEdit, FaTrash } from "react-icons/fa";
 
-const UserListScreen = () => {
-  const { data: users, isLoading, isError } = useGetAllUsersQuery();
-  console.log(users);
 
-  const userDetails = (id) => {
-    console.log(id);
-  };
+const UserListScreen = () => {
+  const { data: users, refetch, isLoading, isError } = useGetAllUsersQuery();
+
+  useEffect(() => {
+    refetch();
+  }, [users,refetch]);
+
   return (
     <>
       <h2>Users</h2>
@@ -45,9 +47,11 @@ const UserListScreen = () => {
                   )}
                 </td>
                 <td>
-                  <Button onClick={() => userDetails(user._id)}>
-                    <FaEdit />
-                  </Button>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                    <Button>
+                      <FaEdit />
+                    </Button>
+                  </LinkContainer>
                 </td>
                 <td>
                   <Button variant="danger">

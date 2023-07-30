@@ -128,7 +128,14 @@ const getAllusers = asyncHandler(async (req, res) => {
 //GET /api/user/:id
 
 const getUserById = asyncHandler(async (req, res) => {
-  res.send("get all users");
+  // console.log(req.params.id);
+  const user = await User.findById(req.params.id).select("-password");
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
 });
 
 //delete user
@@ -142,7 +149,19 @@ const deleteUser = asyncHandler(async (req, res) => {
 //PUT /api/user/:id
 
 const updateUserById = asyncHandler(async (req, res) => {
-  res.send("update  user by ıd");
+  const { name, email, isAdmin } = req.body;
+  const id = req.params.id;
+  const userToUpdate = await User.findById(id);
+  if (userToUpdate) {
+    userToUpdate.name = name;
+    userToUpdate.email = email;
+    userToUpdate.isAdmin = isAdmin;
+    const reslt = await userToUpdate.save();
+    res.status(201).json(reslt);
+  } else {
+    res.status(404);
+    throw new Error("no user found");
+  }
 });
 
 export {

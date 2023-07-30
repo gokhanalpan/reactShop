@@ -28,6 +28,7 @@ import OrderListScreen from "./Screens/OrderListScreen";
 import ProductListScreen from "./Screens/ProductListScreen";
 import ProductEditScreen from "./Screens/ProductEditScreen";
 import UserListScreen from "./Screens/UserListScreen";
+import UserDetailScreen from "./Screens/UserDetailScreen";
 import store from "./store";
 import { Provider } from "react-redux";
 import AdminRoutes from "./Components/AdminRoutes";
@@ -36,6 +37,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" index={true} element={<HomeScreen />}></Route>
+      <Route path="/search/:keyword" element={<HomeScreen />}></Route>
+      <Route path="/page/:pageNumber" element={<HomeScreen />}></Route>
+      <Route path="/search/:keyword/page/:pageNumber" element={<HomeScreen />}></Route>
+
       <Route path="/product/:id" element={<ProductScreen />}></Route>
       <Route path="/cart" element={<CartScreen />}></Route>
       <Route path="/login" element={<LoginScreen />}></Route>
@@ -55,10 +60,18 @@ const router = createBrowserRouter(
           element={<ProductListScreen />}
         ></Route>
         <Route
+          path="/admin/productList/:pageNumber"
+          element={<ProductListScreen />}
+        ></Route>
+        <Route
           path="/admin/product/:id/edit"
           element={<ProductEditScreen />}
         ></Route>
         <Route path="/admin/userList" element={<UserListScreen />}></Route>
+        <Route
+          path="/admin/user/:id/edit"
+          element={<UserDetailScreen />}
+        ></Route>
       </Route>
     </Route>
   )

@@ -10,7 +10,6 @@ import userRoutes from "./Routes/userRoutes.js";
 import orderRoutes from "./Routes/orderRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 import UploadRoutes from "./Routes/uploadRoutes.js";
-import products from "./data/products.js";
 const port = process.env.PORT || 5000;
 connectDB();
 
