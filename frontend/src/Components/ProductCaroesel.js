@@ -8,12 +8,10 @@ import Message from "./Message";
 const ProductCaroesel = () => {
   const { data: products, isLoading, isError } = useGetToproductsQuery();
 
-  return isLoading ? (
-    <Loader />
-  ) : isError ? (
+  return isError ? (
     <Message variant="danger">{isError}</Message>
   ) : (
-    <Carousel pause="hover" className="bg-primary mb-4">
+    <Carousel pause="hover"  className="bg-primary mb-4">
       {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>
